@@ -1,24 +1,24 @@
 #install dependencies
 
 import pandas as pd
-from splinter import Browser
 from bs4 import BeautifulSoup as bs
-import requests
-import os
+from splinter import Browser
+
+
 
 
 def scrape_mars():
+
     # intializing the browser object
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
+    news_title, news_parag = news(browser)
 
-    news(browser) = news_title, news_parag
-
-    mars_data = {
+    data = {
         "news_title":news_title,
         "news_paragraph":news_parag,
         "featured_image":feature_image(browser),
-        "mars facts": table(),
+        "mars_facts": table(),
         "hemispheres":mars_hemis(browser)
     }
 
@@ -41,17 +41,12 @@ def news(browser):
 
     # Finding the most recent title and pargraph
     news_title_div = soup.find('div', class_ = 'list_text').find('div', class_='content_title')
-    print(news_title_div)
+    news_title = news_title_div.get_text()
+    news_title
 
     new_parag_div = soup.find('div', class_= 'article_teaser_body')
-    new_parag_div
-
-    # print news title to check
-    news_title = news_title_div.get_text()
-
-    # print news summary paragraph
     news_parag = new_parag_div.get_text()
-
+    news_parag
 
 def feature_image():
     ## PART 2
@@ -110,15 +105,13 @@ def table():
 
     # add column headers
     mars_stats_df.columns=['Description', 'Mars']
-    mars_stats_df
 
     # set Description column as index
     # https://beenje.github.io/blog/posts/parsing-html-tables-in-python-with-pandas/
     mars_stats_df.set_index('Description', inplace = True)
-    mars_stats_df
 
     # convert dataframe to html table string
-    mars_stats_df.to_html('mars_facts.html')
+    return mars_stats_df.to_html('mars_facts.html')
 
 
 

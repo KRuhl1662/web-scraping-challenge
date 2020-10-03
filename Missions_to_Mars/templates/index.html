@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All About Mars</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class='container'>
@@ -16,8 +20,34 @@
 
 
         <!-- Adding a new section to display Mars facts -->
-        
+        <div class = 'row' id='mars_news'>
+            <div class='col-md-12'>
+                <div class ='media'>
+                    <h2>The Latest Update from Mars</h2>
+                    <h4>{{mars.news_title }}</h4>
+                    <p>{{ mars.news_paragraph }}</p>
+                </div>
+            </div>
+        </div>
     </div>
     
+    <!-- Now to place the featured image -->
+    <div class = 'row' id='featured-image'>
+        <img src='{{mars.featured_image}}'
+        class='img-responsive'
+        alt="Responsive Image"
+        />
+    </div>
+
+    <!-- Now inserting the table next to the featured image -->
+    <div class='col-md-4'>
+        <div class='row' id='mars-facts'>
+            <div class='col-md-12'>
+                <h3>Facts About Mars</h3>
+                {{mars.mars_facts}}
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
