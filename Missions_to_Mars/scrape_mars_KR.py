@@ -12,16 +12,22 @@ def scrape_mars():
     executable_path = {'executable_path': 'chromedriver.exe'}
     browser = Browser('chrome', **executable_path, headless=False)
 
+    news(browser) = news_title, news_parag
+
     mars_data = {
         "news_title":news_title,
         "news_paragraph":news_parag,
-        "featured_image":feature_image(),
+        "featured_image":feature_image(browser),
         "mars facts": table(),
-        "hemispheres":mars_hemis()
+        "hemispheres":mars_hemis(browser)
     }
 
+    # stop the web browser and return mars_data dictionary
+    browser.quit()
+    return data
 
-def news():
+
+def news(browser):
     ## PART 1
 
     # set NASA url
@@ -42,11 +48,9 @@ def news():
 
     # print news title to check
     news_title = news_title_div.get_text()
-    news_title
 
     # print news summary paragraph
     news_parag = new_parag_div.get_text()
-    news_parag
 
 
 def feature_image():
@@ -202,4 +206,6 @@ def mars_hemis():
         {"title": "Valles Marineris Hemisphere", "img_url": valles_img_url}
     ]
 
-
+if __name__ == "__main__":
+    
+    print(scrape_mars())
