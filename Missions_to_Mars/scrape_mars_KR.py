@@ -3,7 +3,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
-
+import time
 
 
 
@@ -40,15 +40,17 @@ def news(browser):
     soup = bs(html, 'html.parser')
 
     # Finding the most recent title and pargraph
+    time.sleep(1)
     news_title_div = soup.find('div', class_ = 'list_text').find('div', class_='content_title')
     news_title = news_title_div.get_text()
-    news_title
 
     new_parag_div = soup.find('div', class_= 'article_teaser_body')
     news_parag = new_parag_div.get_text()
-    news_parag
 
-def feature_image():
+    #you have to return something in a function, or you get nothing... just blank stares
+    return news_title, news_parag
+
+def feature_image(browser):
     ## PART 2
 
     # set featured image url
@@ -81,7 +83,8 @@ def feature_image():
     relative_img_url = soup.find('figure', class_ ="lede").find('img', class_='main_image').get('src')
         
     feature_image_url = f'https://www.jpl.nasa.gov{relative_img_url}'
-    feature_image_url
+
+    return feature_image_url
 
 
 def table():
@@ -111,11 +114,11 @@ def table():
     mars_stats_df.set_index('Description', inplace = True)
 
     # convert dataframe to html table string
-    return mars_stats_df.to_html('mars_facts.html')
+    return mars_stats_df.to_html(classes = 'table table-striped')
 
 
 
-def mars_hemis():
+def mars_hemis(browser):
     ## Part 4
 
     # set featured image url
@@ -125,6 +128,7 @@ def mars_hemis():
 
     # CERBERUS (I'm sure there is going to be a way to loop this process, but I want to just get it working first)
     # use Splinter to click on Cerberus link
+    time.sleep(1)
     cerberus_link = browser.links.find_by_partial_text('Cerberus Hemisphere Enhanced')
     cerberus_link.click()
 
@@ -139,9 +143,12 @@ def mars_hemis():
     cerberus_img_url = f'https://astrogeology.usgs.gov{relative_cerberus_url}'
     cerberus_img_url
 
+    browser.back()
+
 
     # SCHIAPARELLI
     # click on Schiaparelli link
+    time.sleep(1)
     schia_link = browser.links.find_by_partial_text('Schiaparelli Hemisphere Enhanced')
     schia_link.click()
 
@@ -156,8 +163,11 @@ def mars_hemis():
     schiaparelli_img_url = f'https://astrogeology.usgs.gov{relative_schia_url}'
     schiaparelli_img_url
 
+    browser.back()
+
 
     # SYRTIS MAJOR
+    time.sleep(1)
     # click on Syrtis Major link
     syrtis_link = browser.links.find_by_partial_text('Syrtis Major Hemisphere Enhanced')
     syrtis_link.click()
@@ -173,9 +183,11 @@ def mars_hemis():
     syrtis_img_url = f'https://astrogeology.usgs.gov{relative_syrtis_url}'
     syrtis_img_url
 
+    browser.back()
 
     # VALLES MARINERIS
     # click on Valles Marineris link
+    time.sleep(1)
     valles_link = browser.links.find_by_partial_text('Valles Marineris Hemisphere Enhanced')
     valles_link.click()
 
@@ -190,6 +202,7 @@ def mars_hemis():
     valles_img_url = f'https://astrogeology.usgs.gov{relative_valles_url}'
     valles_img_url
 
+    browser.back()
 
     # Hemisphere Images
     mars_hemis = [
@@ -199,6 +212,7 @@ def mars_hemis():
         {"title": "Valles Marineris Hemisphere", "img_url": valles_img_url}
     ]
 
+    return mars_hemis
 if __name__ == "__main__":
     
     print(scrape_mars())
