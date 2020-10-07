@@ -23,9 +23,12 @@
         <div class = 'row' id='mars_news'>
             <div class='col-md-12'>
                 <div class ='media'>
-                    <h2>The Latest Update from Mars</h2>
-                    <h4>{{mars.news_title }}</h4>
-                    <p>{{ mars.news_paragraph }}</p>
+                    <hr>
+                        <h2>The Latest Update from Mars</h2>
+                    <hr>
+                        <h4>{{mars.news_title }}</h4>
+                    <hr>
+                        <p>{{ mars.news_paragraph }}</p>
                 </div>
             </div>
         </div>
@@ -33,18 +36,18 @@
     
     <!-- Now to place the featured image -->
     <div class = 'row' id='featured-image'>
-        <img src='{{mars.featured_image}}'
-        class='img-responsive'
-        alt="Responsive Image"
-        />
-    </div>
+        <div class='col-md-5'>
+            <img src='{{mars.featured_image}}'
+            class='img-responsive'
+            alt="Responsive Image"/>
+        </div>    
+    
 
     <!-- Now inserting the table next to the featured image -->
-    <div class='col-md-4'>
-        <div class='row' id='mars-facts'>
-            <div class='col-md-12'>
+        <div class='col-md-12'>
+            <div class='row' id='mars-facts'>
                 <h3>Facts About Mars</h3>
-                {{mars.mars_facts}}
+                {{mars.mars_facts | safe}}
             </div>
         </div>
     </div>
